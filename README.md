@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://github.com/cevdetkarakulak/OrganikPazar/blob/main/OrganikPazar_Banner.png?raw=true" alt="Organik Pazar | AI Powered Marketplace Banner" width="100%">
+</p>
+
+<h3 align="center">🍏 Organik Pazar – AI Powered Marketplace built with ASP.NET Core 9.0 & PostgreSQL</h3>
+
+---
+
 # 🍏 **Organik Pazar | ASP.NET Core 9.0 + PostgreSQL + AI + ML.NET + SignalR + Multi-Language Gerçek Dünya Projesi** 🚀
 
 **Organik Pazar**, **ASP.NET Core 9.0 MVC** ve **PostgreSQL** teknolojileriyle geliştirilen, **ML.NET** destekli satış tahmini, **Google Gemini** tabanlı tarif öneri sistemi, **SignalR canlı chat** altyapısı, **Leaflet harita analizleri** ve **çoklu dil (TR / EN / FR)** desteği barındıran profesyonel bir tam yığın (Full Stack) projedir.  
@@ -59,6 +67,47 @@ Model, sipariş sayısı, şehir, kategori ve tarih parametrelerini değerlendir
 - 📅 **Şubat 2026** → Tahmini Sipariş: **100**  
 - 📅 **Mart 2026** → Tahmini Sipariş: **113**
 
+
+
+## 🧠 **AI Tarif Öneri Sistemi & Ürün Tavsiye Motoru (Google Gemini)**
+
+Sistem, kullanıcının elindeki malzemeleri girdiği prompt üzerinden **Google Gemini API** ile analiz eder, uygun yemek tarifini oluşturur ve bu tarife göre **ürün önerileri** sunar.  
+
+Her öneri; ürün adı, fiyat bilgisi ve işlem butonlarıyla birlikte gelir:
+
+| Ürün | Fiyat | İşlemler |
+|------|--------|-----------|
+| 🍌 **Muz** | 39,90 ₺ | 🔍 [Detaya Git](#) & 🛒 [Sepete Ekle](#) |
+| 🥛 **Badem Sütü** | 49,90 ₺ | 🔍 [Detaya Git](#) & 🛒 [Sepete Ekle](#) |
+
+🧩 Bu yapı, tarifte geçen malzemeleri **Product** tablosundaki ürünlerle eşleştirerek dinamik olarak getirir.  
+Örneğin kullanıcı şu girişi yaparsa:
+
+> “Muz, süt ve kakao ile bir tarif öner”  
+
+Gemini API’den dönen tarif:  
+> *“Muzlu Kakaolu Smoothie Tarifi”* 🍹  
+
+ve sistem aşağıdaki bileşenleri oluşturur:
+
+- 📦 **Organik Pazar’dan Ürün ve Fiyat Önerileri:** Muz, Süt, Kakao Tozu, Bal  
+- 💬 **Alternatif Tarif Önerileri:** “Muzlu Kakaolu Yulaf Lapası”, “Muzlu Puding”, “Donmuş Muzlu Dilimler”  
+- 🔗 **Detaya Git / Sepete Ekle butonları:**  
+  - `/product/{productId}` → Ürün detay sayfası  
+  - `/cart/add?productId={productId}&qty=1` → Sepete ekleme işlemi  
+
+💡 Eğer sepet sistemi devre dışıysa, butonlar otomatik olarak **WhatsApp Sipariş** linkine dönüşür:  
+`https://wa.me/905555555555?text=Merhaba,%20{productName}%20siparişi%20vermek%20istiyorum`
+
+---
+
+### 📸 Örnek Ekran Görüntüsü
+![AI Tarif Öneri Sistemi](https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/AI_Recipe_Suggestion.png)
+
+---
+
+Bu bölüm, **AI destekli içerik üretimi ile ürün tavsiye sistemini** birleştirerek kullanıcıya hem tarif hem alışveriş deneyimi sunar 🚀
+
 ---
 
 ## 🌍 **Çoklu Dil (Multi-Language) Desteği**
@@ -85,8 +134,8 @@ Kullanıcı veya admin, 📞 ikonuna tıklayarak **WhatsApp Web** üzerinden do�
 ## 👨‍💻 **Geliştirici**
 
 **Cevdet Karakulak**  
-🧩 Full Stack Developer 
-🌐 [LinkedIn](https://www.linkedin.com/in/cevdet) | 💻 [GitHub](https://github.com/Cevdet-Karakulak)
+🧩 Full Stack Developer · AI & Data Enthusiast  
+🌐 [LinkedIn](https://www.linkedin.com/in/cevdetkarakulak) | 💻 [GitHub](https://github.com/cevdetkarakulak)
 
 ---
 
@@ -101,3 +150,29 @@ Kişisel, eğitim ve portföy amaçlı kullanımlar için serbesttir.
 
 > M&Y Yazılım Akademi ve Murat Yücedağ’a ilhamları için teşekkür ederim.  
 > Organik Pazar, modern .NET teknolojilerinin AI, ML.NET ve çoklu dil desteğiyle birleştiği uçtan uca bir Full Stack başarı örneğidir.
+
+
+
+## 🗺️ **Şehir Bazlı Sipariş Yoğunluğu (Leaflet Harita Analizi)**
+
+Proje, **Leaflet.js** kütüphanesini kullanarak Türkiye haritası üzerinde şehir bazlı sipariş analizini görselleştirir.  
+Her şehirdeki sipariş yoğunluğu, ortalama sipariş tutarı ve en çok sipariş verilen kategoriye göre dinamik olarak renklendirilir.  
+
+🧩 **Özellikler:**  
+- 🔥 Yoğunluğa göre renk ölçeklendirmesi (heat intensity normalization)  
+- 📦 Şehir tıklamasıyla detay kutusu: Toplam sipariş, ortalama fiyat, en çok kategori  
+- 💬 Tooltip ile şehir ismi ve sipariş sayısı  
+- ⚡ API kullanılmadan tamamen **PostgreSQL** sorguları üzerinden veri alınır  
+
+📍 Örnek:  
+> Adana → 1.248 sipariş · Ortalama: 527 ₺ · En Popüler Kategori: Meyve  
+> İstanbul → 7.832 sipariş · Ortalama: 712 ₺ · En Popüler Kategori: Sebze  
+
+---
+
+### 📸 Örnek Ekran Görüntüsü
+![Leaflet Harita Analizi](https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/Leaflet_Heatmap.png)
+
+---
+
+Bu harita bileşeni, **veri analitiği + coğrafi görselleştirme** birleşimiyle yöneticilere satışları şehir bazlı değerlendirme imkânı sunar 📊
