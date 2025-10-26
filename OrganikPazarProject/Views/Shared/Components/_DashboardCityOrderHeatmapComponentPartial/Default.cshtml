@@ -1,0 +1,106 @@
+﻿@model List<CityOrderViewModel>
+@using Newtonsoft.Json
+@using OrganikPazar.Models.ViewModels
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="fas fa-fire text-danger"></i> Şehir Bazlı Sipariş Yoğunluğu (Heatmap)
+            </h4>
+            <div id="turkeyHeatmap" style="height: 650px; border-radius: 12px; z-index: 1;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cityData = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+    const cityCoords = {
+        "Adana": [37.0, 35.3213],
+        "Ankara": [39.9334, 32.8597],
+        "Antalya": [36.8969, 30.7133],
+        "Aydın": [37.8450, 27.8396],
+        "Balıkesir": [39.6484, 27.8826],
+        "Bursa": [40.1828, 29.0669],
+        "Denizli": [37.7833, 29.09],
+        "Diyarbakır": [37.9136, 40.2172],
+        "Erzurum": [39.9059, 41.2655],
+        "Eskişehir": [39.7767, 30.5206],
+        "Gaziantep": [37.0662, 37.3833],
+        "Hatay": [36.4018, 36.3498],
+        "İstanbul": [41.0082, 28.9784],
+        "İzmir": [38.4192, 27.1287],
+        "Kayseri": [38.7333, 35.4833],
+        "Kocaeli": [40.8533, 29.8815],
+        "Konya": [37.8715, 32.4846],
+        "Malatya": [38.3552, 38.3095],
+        "Manisa": [38.6191, 27.4289],
+        "Mersin": [36.8121, 34.6415],
+        "Sakarya": [40.7569, 30.3782],
+        "Samsun": [41.2867, 36.33],
+        "Tekirdağ": [40.9780, 27.5110],
+        "Trabzon": [41.0027, 39.7168],
+        "Şanlıurfa": [37.1674, 38.7955]
+    };
+
+        const map = L.map('turkeyHeatmap').setView([39.0, 35.0], 6);
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 8,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+
+        const orderCounts = cityData.map(c => c.OrderCount);
+    const minOrder = Math.min(...orderCounts);
+    const maxOrder = Math.max(...orderCounts);
+
+    const heatPoints = cityData
+        .map(c => {
+            const coords = cityCoords[c.City];
+            if (!coords) return null;
+
+            const intensity = (c.OrderCount - minOrder) / (maxOrder - minOrder);
+            return [coords[0], coords[1], intensity];
+        })
+        .filter(p => p !== null);
+
+    L.heatLayer(heatPoints, {
+        radius: 30,
+        blur: 25,
+        maxZoom: 8,
+        gradient: {
+            0.2: 'blue',
+            0.4: 'lime',
+            0.6: 'orange',
+            0.8: 'red'
+        }
+    }).addTo(map);
+
+    cityData.forEach(c => {
+        const coords = cityCoords[c.City];
+        if (!coords) return;
+        const marker = L.circleMarker(coords, {
+            radius: 5,
+            color: '#fff',
+            fillColor: '#6a0dad',
+            fillOpacity: 0.9,
+            weight: 1
+        }).addTo(map);
+
+        marker.bindPopup(`
+            <b>${c.City}</b><br>
+            📦 Sipariş: <b>${c.OrderCount}</b><br>
+            💰 Ortalama: ${c.AvgPrice.toFixed(2)} TL<br>
+            🥦 En çok kategori: ${c.TopCategory || "Bilinmiyor"}
+        `);
+    });
+</script>

@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Organik Pazar Admin Panel</title>
+
+    <!-- Melody Admin Tema CSS -->
+    <link rel="stylesheet" href="~/Melody-Premium-Bootstrap-Admin-Dashboard/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="~/Melody-Premium-Bootstrap-Admin-Dashboard/css/style.css" />
+    <link rel="shortcut icon" href="~/Melody-Premium-Bootstrap-Admin-Dashboard/images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- 🔹 Navbar (ViewComponent olarak çağrılıyor) -->
+        @await Component.InvokeAsync("_AdminNavbarComponent")
+
+        <!-- 🔹 Sayfa içeriği -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Melody Admin JS -->
+    <script src="~/Melody-Premium-Bootstrap-Admin-Dashboard/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Melody-Premium-Bootstrap-Admin-Dashboard/js/off-canvas.js"></script>
+    <script src="~/Melody-Premium-Bootstrap-Admin-Dashboard/js/misc.js"></script>
+</body>
+</html>

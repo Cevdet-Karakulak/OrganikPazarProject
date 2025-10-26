@@ -1,0 +1,89 @@
+﻿@model List<OrganikPazar.Entities.Product>
+
+<section class="featured spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Öne Çıkan Ürünler</h2>
+                </div>
+                <div class="featured__controls">
+                    <ul>
+                        <li class="active" data-filter=".tumu">Tümü</li>
+                        <li data-filter=".meyveler">Meyveler</li>
+                        <li data-filter=".sebzeler">Sebzeler</li>
+                        <li data-filter=".icecekler">İçecekler</li>
+                        <li data-filter=".tatlilar">Tatlılar</li>
+                        <li data-filter=".tuzlular">Tuzlular</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row featured__filter">
+            @if (ViewBag.Top8Products != null)
+            {
+                var top8 = ViewBag.Top8Products as List<OrganikPazar.Entities.Product>;
+                foreach (var item in top8)
+                {
+                    var imageFile = System.IO.Path.GetFileName(item.Imageurl) ?? "feature-1.jpg";
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix tumu">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="@Url.Content($"~/ogani-master/img/featured/{imageFile}")">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="/Product/Detail/@item.Productid">@item.Productname</a></h6>
+                                <h5>@item.Unitprice.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    var categoryClass = item.Categoryid switch
+                    {
+                        1 => "meyveler",
+                        2 => "sebzeler",
+                        3 => "icecekler",
+                        4 => "tatlilar",
+                        5 => "tuzlular",
+                        _ => "genel"
+                    };
+
+                    var imageFile = System.IO.Path.GetFileName(item.Imageurl) ?? "feature-1.jpg";
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix @categoryClass">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="@Url.Content($"~/ogani-master/img/featured/{imageFile}")">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="/Product/Detail/@item.Productid">@item.Productname</a></h6>
+                                <h5>@item.Unitprice.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Henüz öne çıkan ürün bulunamadı.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>

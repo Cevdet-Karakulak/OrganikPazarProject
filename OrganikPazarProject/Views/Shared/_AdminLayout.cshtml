@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadDashboardComponentPartial")
+<body>
+    <div class="container-scroller">
+        @await Component.InvokeAsync("_NavbarDashboardComponentPartial")
+        <br /><br />
+        <br />
+        <div class="container-fluid page-body-wrapper">
+            @await Component.InvokeAsync("_ThemeSettingWrapperDashboardComponentPartial")
+            @await Component.InvokeAsync("_RightSidebarDashboardComponentPartial")
+            @await Component.InvokeAsync("_SidebarDashboardComponentPartial")
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                @await Component.InvokeAsync("_LayoutFooterComponentPartial")
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_LayoutScriptsComponentPartial")
+
+    @RenderSection("Scripts", required: false)
+    <style>
+        body {
+            font-family: "Segoe UI", "Poppins", "Arial", "sans-serif";
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model OrganikPazar.Entities.Customer
+
+@{
+    ViewData["Title"] = "✏️ Müşteri Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-3">✏️ Müşteri Güncelle</h2>
+
+<form asp-action="Update" method="post" class="card p-4 shadow-sm">
+    <input type="hidden" asp-for="Customerid" />
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Ad</label>
+            <input asp-for="Firstname" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label>Soyad</label>
+            <input asp-for="Lastname" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label>Telefon</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Şehir</label>
+            <input asp-for="City" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label>Adres</label>
+            <input asp-for="Address" class="form-control" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <i class="fa fa-edit"></i> Güncelle
+    </button>
+    <a href="/Customer" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i> Geri Dön
+    </a>
+</form>

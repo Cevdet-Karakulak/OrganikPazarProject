@@ -1,0 +1,55 @@
+﻿@model dynamic
+
+<div class="card shadow-sm border-0 w-100">
+    <div class="card-header text-white py-2 px-3"
+         style="background: linear-gradient(90deg, #f39c12, #cf8d2e); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h6 class="mb-0 fw-semibold">
+            🥧 Müşteri Segment Dağılımı
+        </h6>
+    </div>
+
+    <div class="card-body bg-light text-center">
+        <div id="segmentChart" style="min-height: 320px;"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const data = {
+            gold: @Model.Gold,
+            silver: @Model.Silver,
+            bronze: @Model.Bronze
+        };
+
+        const options = {
+            chart: {
+                type: 'pie',
+                height: 320
+            },
+            labels: ['Gold Müşteriler', 'Silver Müşteriler', 'Bronze Müşteriler'],
+            series: [data.gold, data.silver, data.bronze],
+            colors: ['#f1c40f', '#95a5a6', '#cd7f32'],
+            legend: {
+                position: 'bottom',
+                labels: { colors: '#2c3e50' }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: (val, opts) => {
+                    return opts.w.config.series[opts.seriesIndex] + " kişi";
+                },
+                style: {
+                    fontSize: '14px',
+                    fontWeight: 'bold'
+                }
+            },
+            tooltip: {
+                y: { formatter: val => val + " müşteri" }
+            }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#segmentChart"), options);
+        chart.render();
+    });
+</script>

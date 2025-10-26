@@ -1,0 +1,51 @@
+﻿@model List<dynamic>
+
+<div class="card shadow-sm border-0 w-100">
+    <div class="card-header text-white py-2 px-3"
+         style="background: linear-gradient(90deg, #218c74, #33d9b2); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h6 class="mb-0 fw-semibold">
+            📊 2026 İlk 3 Ay Satış Tahminleri (Top 5 Şehir)
+        </h6>
+    </div>
+
+    <div class="card-body bg-light p-3">
+        @if (Model != null && Model.Any())
+        {
+            <table class="table table-bordered table-striped text-center align-middle mb-0">
+                <thead class="table-success">
+                    <tr>
+                        <th>Şehir</th>
+                        <th>Tahmin Ayı</th>
+                        <th>Tahmini Sipariş</th>
+                        <th>Model Sürümü</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.City</td>
+                            <td>@(((DateTime)item.ForecastMonth).ToString("MMMM yyyy"))</td>
+                            <td><strong>@item.PredictedOrders</strong></td>
+                            <td>@item.ModelVersion</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-info text-center mb-0">
+                Henüz tahmin verisi bulunamadı.
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 0.9rem;
+    }
+</style>

@@ -1,0 +1,87 @@
+﻿@model List<dynamic>
+
+<div class="card shadow-sm border-0 w-100">
+    <div class="card-header text-white py-2 px-3"
+         style="background: linear-gradient(90deg, #1b4b91, #4a69bd); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h6 class="mb-0 fw-semibold">
+            📈 2026 İlk 3 Ay Tahmin Grafiği (Top 5 Şehir)
+        </h6>
+    </div>
+
+    <div class="card-body bg-light p-3">
+        <div id="forecastLineChart" style="min-height: 320px;"></div>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-info mt-3 text-center">
+                Henüz tahmin verisi bulunamadı.
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rawData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+
+        if (!rawData || rawData.length === 0) return;
+
+        const grouped = {};
+        rawData.forEach(item => {
+            if (!grouped[item.City]) grouped[item.City] = { "Ocak": 0, "Şubat": 0, "Mart": 0 };
+            const monthName = item.Month.charAt(0).toUpperCase() + item.Month.slice(1);
+            grouped[item.City][monthName] = item.PredictedOrders;
+        });
+
+        const seriesData = Object.keys(grouped).map(city => ({
+            name: city,
+            data: [
+                grouped[city]["Ocak"] ?? 0,
+                grouped[city]["Şubat"] ?? 0,
+                grouped[city]["Mart"] ?? 0
+            ]
+        }));
+
+        const options = {
+            chart: {
+                type: 'line',
+                height: 320,
+                toolbar: { show: false },
+                zoom: { enabled: false }
+            },
+            stroke: {
+                width: 3,
+                curve: 'smooth'
+            },
+            markers: {
+                size: 5,
+                hover: { sizeOffset: 3 }
+            },
+            series: seriesData,
+            xaxis: {
+                categories: ['Ocak', 'Şubat', 'Mart'],
+                labels: { style: { fontWeight: 500 } }
+            },
+            dataLabels: {
+                enabled: true,
+                style: { fontSize: '12px', colors: ['#000'] },
+                background: { enabled: false }
+            },
+            grid: {
+                borderColor: '#e0e0e0',
+                strokeDashArray: 4
+            },
+            colors: ['#1b4b91', '#00b894', '#ffb703', '#ef476f', '#8e44ad'],
+            legend: { position: 'bottom', fontSize: '13px' },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: { formatter: val => val + " sipariş" }
+            }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#forecastLineChart"), options);
+        chart.render();
+    });
+</script>

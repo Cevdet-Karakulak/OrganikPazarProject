@@ -1,0 +1,195 @@
+﻿@{
+    ViewData["Title"] = "📊 Organik Pazar İstatistikleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <h2 class="page-title text-success">
+        📈 Organik Pazar İstatistikleri
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-success">🧺 Ürün Sayısı</h4>
+                        <h2 class="font-weight-bold">@ViewBag.TotalProductCount</h2>
+                        <p class="text-muted">Sistemde kayıtlı ürün sayısı</p>
+                    </div>
+                    <i class="fa fa-leaf fa-3x text-success"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-warning">💰 Toplam Satış</h4>
+                        <h2 class="font-weight-bold">@ViewBag.TotalSales </h2>
+                        <p class="text-muted">Tüm siparişlerin toplam tutarı</p>
+                    </div>
+                    <i class="fa fa-chart-line fa-3x text-warning"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-info">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-info">🚚 Teslim Edilen Siparişler</h4>
+                        <h2 class="font-weight-bold">@ViewBag.DeliveredOrders</h2>
+                        <p class="text-muted">Teslim edilen sipariş sayısı</p>
+                    </div>
+                    <i class="fa fa-truck fa-3x text-info"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-primary">📦 En Fazla Stoklu Ürün</h4>
+                        <h3 class="font-weight-bold">@ViewBag.TopStockProduct</h3>
+                        <p class="text-muted">@ViewBag.TopStockCount adet stokta</p>
+                    </div>
+                    <i class="fa fa-box fa-3x text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-danger">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-danger">⭐ En Yüksek Puanlı Ürün</h4>
+                        <h3 class="font-weight-bold">@ViewBag.BestProductName</h3>
+                        <p class="text-muted">Puan: 4,5</p>
+                    </div>
+                    <i class="fa fa-star fa-3x text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-dark">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-dark">🏙️ En Çok Sipariş Şehri</h4>
+                        <h3 class="font-weight-bold">@ViewBag.TopCity</h3>
+                        <p class="text-muted">En fazla sipariş burada</p>
+                    </div>
+                    <i class="fa fa-city fa-3x text-dark"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-secondary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-info">📊 Ortalama Sipariş Tutarı</h4>
+                        <h3 class="font-weight-bold">@ViewBag.AvgOrderPrice ₺</h3>
+                        <p class="text-muted">Sipariş başına ortalama</p>
+                    </div>
+                    <i class="fa fa-chart-bar fa-3x text-info"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-success">👥 Müşteri Sayısı</h4>
+                        <h3 class="font-weight-bold">@ViewBag.CustomerCount</h3>
+                        <p class="text-muted">Toplam kayıtlı müşteri</p>
+                    </div>
+                    <i class="fa fa-users fa-3x text-success"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card shadow-sm border-left-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title text-warning">🏆 En Çok Satan Kategori</h4>
+                        <h3 class="font-weight-bold">@ViewBag.TopCategory</h3>
+                        <p class="text-muted">En popüler kategori</p>
+                    </div>
+                    <i class="fa fa-crown fa-3x text-warning"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .border-left-success {
+        border-left: 5px solid #28a745 !important;
+    }
+
+    .border-left-warning {
+        border-left: 5px solid #ffc107 !important;
+    }
+
+    .border-left-info {
+        border-left: 5px solid #17a2b8 !important;
+    }
+
+    .border-left-primary {
+        border-left: 5px solid #007bff !important;
+    }
+
+    .border-left-danger {
+        border-left: 5px solid #dc3545 !important;
+    }
+
+    .border-left-dark {
+        border-left: 5px solid #343a40 !important;
+    }
+
+    .border-left-secondary {
+        border-left: 5px solid #6c757d !important;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+    h2, h3 {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>

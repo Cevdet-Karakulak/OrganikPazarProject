@@ -1,0 +1,147 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <br /><br />
+
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link">
+                <div class="profile-image">
+                    <img src="/Melody-Premium-Bootstrap-Admin-Dashboard-Template/images/faces/face5.jpg" alt="image" />
+                </div>
+                <div class="profile-name">
+                    <p class="name">Hoşgeldin Cevdet</p>
+                    <p class="designation">Admin</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item mt-4">
+            <a class="nav-link" href="/Home/Index" target="_blank">
+                <i class="fa fa-globe menu-icon text-success"></i>
+                <span class="menu-title">Siteye Git</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" ? "active" : "")">
+            <a class="nav-link" href="/Dashboard/Index/">
+                <i class="fa fa-home menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Statistics" ? "active" : "")">
+            <a class="nav-link" href="/Statistics/Index/">
+                <i class="fa fa-puzzle-piece menu-icon"></i>
+                <span class="menu-title">İstatistikler</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Category" ? "active" : "")">
+            <a class="nav-link" href="/Category/Index/">
+                <i class="far fa-file-alt menu-icon"></i>
+                <span class="menu-title">Kategoriler</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Customer" ? "active" : "")">
+            <a class="nav-link" href="/Customer/Index/">
+                <i class="fa fa-sort-alpha-down menu-icon"></i>
+                <span class="menu-title">Müşteri Listesi</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Product" ? "active" : "")">
+            <a class="nav-link" href="/Product/Index/">
+                <i class="fa fa-box menu-icon"></i>
+                <span class="menu-title">Ürün Listesi</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Order" ? "active" : "")">
+            <a class="nav-link" href="/Order/Index/">
+                <i class="fa fa-clipboard-list menu-icon"></i>
+                <span class="menu-title">Sipariş Listesi</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "AI" &&
+                                 ViewContext.RouteData.Values["action"].ToString() == "GetRecipe" ? "active" : "")">
+            <a class="nav-link" href="/AI/GetRecipe">
+                <i class="fa fa-utensils menu-icon"></i>
+                <span class="menu-title">AI Tarif</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "ML" &&
+                                 ViewContext.RouteData.Values["action"].ToString() == "TrainForecast" ? "active" : "")">
+            <a class="nav-link" href="/ML/TrainForecast/">
+                <i class="fa fa-chart-line menu-icon"></i>
+                <span class="menu-title">Satış Tahmini</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "ML" &&
+                                 ViewContext.RouteData.Values["action"].ToString() == "CustomForecast" ? "active" : "")">
+            <a class="nav-link" href="/ML/CustomForecast/">
+                <i class="fa fa-building menu-icon"></i>
+                <span class="menu-title">Şehir Bazlı Tahmin</span>
+            </a>
+        </li>
+
+        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString() == "Log" ? "active" : "")">
+            <a class="nav-link" href="/Log/Index/">
+                <i class="fa fa-history menu-icon text-warning"></i>
+                <span class="menu-title">Log Kayıtları</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    .sidebar .nav .nav-link {
+        color: #555;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+
+        .sidebar .nav .nav-link i {
+            color: #6c63ff;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar .nav .nav-link:hover {
+            color: #2f2e85;
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+            .sidebar .nav .nav-link:hover i {
+                color: #2f2e85;
+            }
+
+    .sidebar .nav .nav-item.active > .nav-link {
+        background-color: #edeaff;
+        color: #2f2e85;
+        font-weight: 600;
+        border-left: 4px solid #6c63ff;
+    }
+
+        .sidebar .nav .nav-item.active > .nav-link i {
+            color: #2f2e85;
+        }
+
+    .nav-item a[href="/Home/Index"],
+    .nav-item a[href="/Log/Index/"] {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 8px;
+        padding-top: 12px;
+    }
+
+        .nav-item a[href="/Home/Index"]:hover {
+            background: linear-gradient(90deg, #00b894, #009432);
+            color: #fff !important;
+        }
+
+        .nav-item a[href="/Log/Index/"]:hover {
+            background: linear-gradient(90deg, #ffb142, #ff793f);
+            color: #fff !important;
+        }
+</style>

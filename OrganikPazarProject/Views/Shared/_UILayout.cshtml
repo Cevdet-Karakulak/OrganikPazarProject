@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Organik Pazar - Doğal Ürünler ve Taze Gıdalar">
+    <meta name="keywords" content="organik pazar, doğal ürünler, taze sebze, meyve, sağlıklı yaşam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Organik Pazar</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/ogani-master/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/ogani-master/css/style.css" type="text/css">
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <div id="preloder"><div class="loader"></div></div>
+
+    @await Component.InvokeAsync("_MobileMenuComponent")
+
+    @await Component.InvokeAsync("_HeaderComponentPartial")
+
+    @await Component.InvokeAsync("_HeroComponentPartial")
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    @await Component.InvokeAsync("_FooterComponent")
+
+    <script src="~/ogani-master/js/jquery-3.3.1.min.js"></script>
+    <script src="~/ogani-master/js/bootstrap.min.js"></script>
+    <script src="~/ogani-master/js/jquery.nice-select.min.js"></script>
+    <script src="~/ogani-master/js/jquery-ui.min.js"></script>
+    <script src="~/ogani-master/js/jquery.slicknav.js"></script>
+    <script src="~/ogani-master/js/mixitup.min.js"></script>
+    <script src="~/ogani-master/js/owl.carousel.min.js"></script>
+    <script src="~/ogani-master/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'tr',
+                includedLanguages: 'tr,en,fr',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function setLanguage(lang, flagPath, text) {
+            const applyLang = () => {
+                const select = document.querySelector(".goog-te-combo");
+                if (select) {
+                    select.value = lang;
+                    select.dispatchEvent(new Event("change"));
+                    document.getElementById("currentFlag").src = flagPath;
+                    document.getElementById("currentLang").textContent = text;
+                    localStorage.setItem("selectedLanguage", lang);
+                    localStorage.setItem("selectedFlag", flagPath);
+                    localStorage.setItem("selectedLangText", text);
+                } else setTimeout(applyLang, 400);
+            };
+            applyLang();
+            closeLanguageDropdown(); /
+        }
+
+            document.addEventListener("DOMContentLoaded", function () {
+            const dropdown = document.querySelector(".header__top__right__language.dropdown");
+            const menu = dropdown?.querySelector(".dropdown-menu");
+            const toggle = dropdown?.querySelector(".dropdown-toggle");
+
+            if (toggle && menu) {
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    menu.classList.toggle("show");
+                });
+            }
+
+            document.querySelectorAll(".header__top__right__language .dropdown-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    menu.classList.remove("show");
+                });
+            });
+
+            document.addEventListener("click", function (e) {
+                if (menu && !dropdown.contains(e.target)) {
+                    menu.classList.remove("show");
+                }
+            });
+        });
+        (function forceHideTranslate() {
+            function hideTranslateBar() {
+                try {
+                    document.querySelectorAll(".goog-te-banner-frame, .goog-tooltip, #goog-gt-tt, .skiptranslate")
+                        .forEach(el => {
+                            el.style.display = "none";
+                            el.style.visibility = "hidden";
+                            el.style.opacity = "0";
+                            el.style.height = "0";
+                        });
+                    document.body.style.top = "0px";
+
+                    if (window.top && window.top.document) {
+                        window.top.document.querySelectorAll(".goog-te-banner-frame, .skiptranslate").forEach(f => {
+                            f.style.display = "none";
+                            f.style.visibility = "hidden";
+                        });
+                        window.top.document.body.style.top = "0px";
+                    }
+                } catch {}
+            }
+            hideTranslateBar();
+            setInterval(hideTranslateBar, 800);
+        })();
+    </script>
+
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-tooltip,
+        .goog-text-highlight,
+        .goog-te-gadget,
+        .goog-te-gadget-simple,
+        .goog-te-menu-value span,
+        .goog-te-menu-value img {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
+        html, body {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            top: 0 !important;
+            position: static !important;
+            background-color: #fff;
+        }
+
+        .header__top__right__language.dropdown .dropdown-menu {
+            position: absolute !important;
+            top: calc(100% + 4px) !important;
+            right: 0 !important;
+            left: auto !important;
+            margin-top: 0;
+            transform: none !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            background-color: #fff;
+            z-index: 9999 !important;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿@model List<OrganikPazar.Entities.Category>
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Kategoriler</span>
+                    </div>
+                    <ul>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <li><a href="/Shop/Category/@item.Categoryid">@item.Categoryname</a></li>
+                            }
+                        }
+                        else
+                        {
+                            <li><a href="#">Veri bulunamadı</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form asp-controller="Product" asp-action="Search" method="get">
+                            <div class="hero__search__categories">
+                                Tüm Kategoriler
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" name="query" placeholder="Ne arıyorsunuz?">
+                            <button type="submit" class="site-btn">ARA</button>
+                        </form>
+                    </div>
+
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <a href="javascript:void(0);" onclick="openWhatsApp()" title="WhatsApp ile Görüş">
+                                <i class="fa fa-whatsapp" style="color:#25D366;"></i>
+                            </a>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5 style="color:#000000;">+90 555 555 5555</h5>
+                            <span>7/24 WhatsApp Desteği</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero__item set-bg" data-setbg="@Url.Content("~/ogani-master/img/banner/banner-1.jpg")">
+                    <div class="hero__text">
+                        <span>TAMAMEN DOĞAL</span>
+                        <h2>Organik Ürünler <br /> & Taze Sebzeler</h2>
+                        <p>Kapınıza ücretsiz teslimat fırsatı</p>
+                        <a href="/Shop/Index" class="primary-btn">Alışverişe Başla</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function openWhatsApp() {
+        const phone = "9055555555"; 
+        const message = "Merhaba Organik Pazar, yardıma ihtiyacım var.";
+        const encoded = encodeURIComponent(message);
+
+        if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank");
+        } else {
+            window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`, "_blank");
+        }
+    }
+</script>

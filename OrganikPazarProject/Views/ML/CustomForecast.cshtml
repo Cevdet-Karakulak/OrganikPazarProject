@@ -1,0 +1,132 @@
+﻿@model List<dynamic>
+
+@{
+    ViewData["Title"] = "📈 Şehir Bazlı Tahmin | ML.NET";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var cities = ViewBag.Cities as List<string> ?? new List<string>();
+}
+
+<h2 class="mb-3 text-primary fw-bold">📈 Şehir Bazlı Sipariş Tahmini</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form asp-action="RunCustomForecast" method="post" class="row g-3 align-items-end">
+            <div class="col-md-6">
+                <label for="SelectedCity" class="form-label fw-semibold">Şehir Seçiniz</label>
+                <select id="SelectedCity" name="SelectedCity" class="form-select" required>
+                    <option value="">-- Şehir Seçin --</option>
+                    @foreach (var city in cities)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success shadow-sm w-100">
+                    <i class="fa fa-robot"></i> Tahmin Modelini Çalıştır
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger shadow-sm text-center fw-semibold">@TempData["Error"]</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success shadow-sm text-center fw-semibold">@TempData["Success"]</div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <h5 class="fw-bold text-primary mb-3">
+        📊 @Model.First().City Şehri İçin Son 3 Aylık Tahmin Sonuçları
+    </h5>
+
+    <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Şehir</th>
+                <th>Tahmin Ayı</th>
+                <th>Tahmini Sipariş Sayısı</th>
+                <th>Model Sürümü</th>
+                <th>Oluşturulma Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 0;
+                var sorted = Model.OrderBy(x => (DateTime)x.ForecastMonth).ToList();
+            }
+            @foreach (var item in sorted)
+            {
+                index++;
+                <tr>
+                    <td>@index</td>
+                    <td>@item.City</td>
+                    <td>@(((DateTime)item.ForecastMonth).ToString("MMMM yyyy"))</td>
+                    <td><strong class="text-success">@item.PredictedOrders</strong></td>
+                    <td>@item.ModelVersion</td>
+                    <td>@(((DateTime)item.CreatedAt).ToString("dd.MM.yyyy HH:mm"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model != null)
+{
+    <div class="alert alert-info text-center shadow-sm">
+        Henüz bu şehir için tahmin sonucu bulunamadı.
+        <br />
+        <b>“Tahmin Modelini Çalıştır”</b> butonuna basarak yeni tahmin oluşturabilirsiniz.
+    </div>
+}
+
+<style>
+    body {
+        background-color: #f5f6fa;
+    }
+
+    h2 {
+        color: #1b4b91;
+        font-weight: 700;
+    }
+
+    .table {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn {
+        font-weight: 500;
+        border-radius: 8px;
+    }
+
+    .alert {
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+
+    .alert-success {
+        background-color: #eaffea;
+        color: #2e7d32;
+    }
+
+    .alert-danger {
+        background-color: #ffeaea;
+        color: #c62828;
+    }
+
+    .alert-info {
+        background-color: #e9f0ff;
+        color: #1b4b91;
+    }
+
+    th {
+        white-space: nowrap;
+    }
+</style>

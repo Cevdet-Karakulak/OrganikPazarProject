@@ -1,0 +1,48 @@
+﻿@model OrganikPazar.Entities.Order
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Yeni Sipariş Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Müşteri</label>
+        <select asp-for="Customerid" asp-items="ViewBag.Customers" class="form-control">
+            <option value="">Müşteri seçiniz</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Ürün</label>
+        <select asp-for="Productid" asp-items="ViewBag.Products" class="form-control">
+            <option value="">Ürün seçiniz</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Adet</label>
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Toplam Fiyat (TL)</label>
+        <input asp-for="Totalprice" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Şehir</label>
+        <input asp-for="City" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Durum</label>
+        <input asp-for="Status" class="form-control" value="Beklemede" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a href="/Order" class="btn btn-secondary">İptal</a>
+</form>
+

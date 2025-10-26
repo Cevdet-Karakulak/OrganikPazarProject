@@ -1,0 +1,127 @@
+@using OrganikPazar.Models.ViewModels
+@model List<OrderListViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+
+}
+
+<h2 class="mb-3">📦 Sipariş Listesi</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a class="btn btn-success" href="/Order/Create">
+        <i class="fa fa-plus"></i> Yeni Sipariş Ekle
+    </a>
+
+    <form method="get" class="d-flex align-items-center" style="gap: 6px; max-width: 400px;">
+        <input type="text"
+               name="search"
+               value="@ViewBag.Search"
+               class="form-control form-control-sm"
+               placeholder="Ara (Müşteri, Ürün, Şehir...)"
+               style="border-radius: 20px;">
+        <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-search"></i> Ara
+        </button>
+        @if (!string.IsNullOrEmpty(ViewBag.Search))
+        {
+            <a href="/Order/Index" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-times"></i> Temizle
+            </a>
+        }
+    </form>
+</div>
+
+
+<table class="table table-hover table-bordered text-center align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Sira No</th>
+            <th>Müşteri</th>
+            <th>Ürün</th>
+            <th>Adet</th>
+            <th>Toplam Fiyat</th>
+            <th>Tarih</th>
+            <th>Durum</th>
+            <th>Şehir</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;    
+            <tr>
+                <td>@(((ViewBag.CurrentPage - 1) * 25) + (Model.IndexOf(item) + 1))</td>
+                <td>@item.CustomerName</td>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@String.Format("{0:N2} TL", item.Totalprice)</td>
+                <td>@(item.Orderdate.HasValue? item.Orderdate.Value.ToString("dd.MM.yyyy") : "-")</td>
+                <td>@item.Status</td>
+                <td>@item.City</td>
+                <td>
+                    <a href="/Order/Update/@item.Orderid" class="btn btn-sm btn-warning">
+                        <i class="fa fa-edit"></i>
+                    </a>                    
+                </td>
+                <td>
+                    <a href="/Order/Delete/@item.Orderid" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Bu siparişi silmek istediğine emin misin?');">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Sayfalama">
+    <ul class="pagination pagination-sm justify-content-center mt-4">
+
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=1">İlk</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)">Önceki</a>
+            </li>
+        }
+
+        @{
+            int visiblePages = 15;
+            int currentPage = Convert.ToInt32(ViewBag.CurrentPage);
+            int totalPages = Convert.ToInt32(ViewBag.TotalPages);
+
+            int startPage = Math.Max(1, currentPage - visiblePages / 2);
+            int endPage = Math.Min(totalPages, startPage + visiblePages - 1);
+
+            if (endPage - startPage < visiblePages - 1)
+            {
+                startPage = Math.Max(1, endPage - visiblePages + 1);
+            }
+        }
+
+        @for (int i = startPage; i <= endPage; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)">Sonraki</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=@ViewBag.TotalPages">Son</a>
+            </li>
+        }
+
+    </ul>
+</nav>

@@ -1,0 +1,30 @@
+﻿@model List<OrganikPazar.Entities.Category>
+
+
+<section class="categories">
+    <div class="container">
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="@item.Imageurl">
+                                <h5>
+                                    <a href="/Shop/Category/@item.Categoryid">@item.Categoryname</a>
+                                </h5>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center">
+                        <p>Kategori bulunamadı.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

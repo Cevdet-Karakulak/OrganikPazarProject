@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "📊 Dashboard | Organik Pazar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+
+    string GetBadgeClass(string changeText)
+    {
+        if (string.IsNullOrEmpty(changeText))
+            return "badge badge-outline-secondary badge-pill";
+
+        if (changeText.Contains("artış"))
+            return "badge badge-outline-success badge-pill";
+        else if (changeText.Contains("azalış"))
+            return "badge badge-outline-danger badge-pill";
+        else
+            return "badge badge-outline-secondary badge-pill";
+    }
+}
+
+<br />
+<br />
+<div class="row grid-margin">
+    <div class="col-12">
+        <div class="card card-statistics">
+            <div class="card-body">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fa fa-user mr-2"></i> Müşteri Sayısı</p>
+                        <h2>@ViewBag.totalCustomerCount</h2>
+                        <label class="@GetBadgeClass(ViewBag.customerGrowth)">
+                            @ViewBag.customerGrowth
+                        </label>
+                    </div>
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fas fa-hourglass-half mr-2"></i> Toplam Ürün Sayısı</p>
+                        <h2>@ViewBag.totalProductCount</h2>
+                        <label class="@GetBadgeClass(ViewBag.productChange)">
+                            @ViewBag.productChange
+                        </label>
+                    </div>
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fas fa-cloud-download-alt mr-2"></i> Toplam Kategori Sayısı</p>
+                        <h2>@ViewBag.totalCategoryCount</h2>
+                        <label class="@GetBadgeClass("%12 artış")">%12 artış</label>
+                    </div>
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fas fa-check-circle mr-2"></i> Ortalama Müşteri Bakiye</p>
+                        <h2>@ViewBag.avgCustomerBalance</h2>
+                        <label class="@GetBadgeClass(ViewBag.balanceChange)">
+                            @ViewBag.balanceChange
+                        </label>
+                    </div>
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fas fa-chart-line mr-2"></i> Toplam Sipariş</p>
+                        <h2>@ViewBag.orderCount</h2>
+                        <label class="@GetBadgeClass(ViewBag.orderChange)">
+                            @ViewBag.orderChange
+                        </label>
+                    </div>
+
+                    <div class="statistics-item">
+                        <p><i class="icon-sm fas fa-circle-notch mr-2"></i> Toplam Satış</p>
+                        <h2>@ViewBag.totalSales</h2>
+                        <label class="@GetBadgeClass(ViewBag.salesChange)">
+                            @ViewBag.salesChange
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @await Component.InvokeAsync("_DashboardOrderDateChartComponentPartial")
+
+    @await Component.InvokeAsync("_DashboardOrderStatusChartComponentPartial")
+</div>
+<div class="row mt-4">
+    @await Component.InvokeAsync("_DashboardRecentOrdersComponentPartial")
+</div>
+@await Component.InvokeAsync("_DashboardCityOrderHeatmapComponentPartial")
+
+<div class="row dashboard-row">
+    <div class="col-md-6 col-lg-6 mb-4 d-flex align-items-stretch">
+        <div class="card shadow-sm border-0 w-100">
+            <div class="card-header text-white py-2 px-3"
+                 style="background: linear-gradient(90deg, #009432, #00b894); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <h6 class="mb-0 fw-semibold">
+                    🚀 Son 5 Ürün
+                </h6>
+            </div>
+
+            <div class="card-body bg-light p-3 overflow-auto">
+                @await Component.InvokeAsync("_Last5ProductsDashboardComponentPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 mb-4 d-flex align-items-stretch">
+        <div class="card shadow-sm border-0 w-100">
+            <div class="card-header text-white py-2 px-3"
+                 style="background: linear-gradient(90deg, #1b4b91, #4a69bd); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <h6 class="mb-0 fw-semibold">
+                    🧩 Son Aktiviteler
+                </h6>
+            </div>
+
+            <div class="card-body bg-light p-3 overflow-auto">
+                @await Component.InvokeAsync("_DashboardLastLogsComponentPartial")
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 mb-4 d-flex align-items-stretch">
+        @await Component.InvokeAsync("_DashboardCustomerSegmentChartComponentPartial")
+    </div>
+
+    <div class="col-md-6 col-lg-6 mb-4 d-flex align-items-stretch">
+        @await Component.InvokeAsync("_DashboardForecastChartComponentPartial")
+    </div>
+</div>
+
+<style>
+    .row.d-flex .card {
+        height: 100%;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    }
+</style>
+
+@await Component.InvokeAsync("_ChatBotComponentPartial")

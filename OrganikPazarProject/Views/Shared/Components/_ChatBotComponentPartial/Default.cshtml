@@ -1,0 +1,373 @@
+﻿<div class="chat-float-button" id="chatToggle">
+    <i class="bi bi-chat-dots-fill"></i>
+    <span class="chat-notification-badge" id="notificationBadge" style="display:none;">1</span>
+</div>
+
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div class="chat-header-info">
+            <div>
+                <div class="fw-bold">🍃 OrganikPazar Asistanı</div>
+                <div class="chat-status">
+                    <span class="chat-status-dot"></span> Çevrimiçi
+                </div>
+            </div>
+        </div>
+        <button class="chat-close" id="chatClose"><i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <div class="connection-status" id="connectionStatus">
+        <i class="bi bi-wifi"></i> Bağlantı Kuruluyor...
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="chat-input">
+        <form class="chat-input-form" id="chatForm">
+            <input type="text" class="chat-input-field" id="chatInput" placeholder="Bir mesaj yazın..." autocomplete="off">
+            <button type="submit" class="chat-send-btn" id="sendBtn">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatToggle = document.getElementById('chatToggle');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatClose = document.getElementById('chatClose');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+        const sendBtn = document.getElementById('sendBtn');
+        const notificationBadge = document.getElementById('notificationBadge');
+        const connectionStatus = document.getElementById('connectionStatus');
+
+        let connection = null;
+        let isTyping = false;
+        const apiUrl = window.location.origin;
+
+        function initializeSignalR() {
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl(`${apiUrl}/chathub`)
+                .withAutomaticReconnect()
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            connection.on("ReceiveMessage", (message) => {
+                hideTypingIndicator();
+                addBotMessage(message);
+            });
+
+            connection.start()
+                .then(() => updateConnectionStatus("connected"))
+                .catch(() => updateConnectionStatus("disconnected"));
+        }
+
+        function updateConnectionStatus(status) {
+            connectionStatus.className = `connection-status ${status}`;
+            connectionStatus.innerHTML = status === "connected"
+                ? '<i class="bi bi-check-circle"></i> Bağlantı Kuruldu'
+                : '<i class="bi bi-x-circle"></i> Bağlantı Kesildi';
+        }
+
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('show');
+            if (chatWindow.classList.contains('show')) {
+                chatInput.focus();
+                notificationBadge.style.display = 'none';
+                if (chatMessages.children.length === 0) {
+                    addBotMessage("👋 Merhaba! Ben OrganikPazar Asistanı. Ürün, fiyat veya tarif hakkında ne öğrenmek istersiniz?");
+                    addQuickReplies();
+                }
+            }
+        });
+
+        chatClose.addEventListener('click', () => chatWindow.classList.remove('show'));
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (message && !isTyping && connection?.state === signalR.HubConnectionState.Connected) {
+                addUserMessage(message);
+                chatInput.value = '';
+                showTypingIndicator();
+                try {
+                    await connection.invoke("SendMessage", message);
+                } catch {
+                    hideTypingIndicator();
+                    addBotMessage("⚠️ Şu anda yanıt veremiyorum. Lütfen tekrar deneyin.");
+                }
+            }
+        });
+
+        function addUserMessage(message) {
+            const msg = document.createElement('div');
+            msg.className = 'message user';
+            msg.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${escapeHtml(message)}</div>
+                    <div class="message-time">${getCurrentTime()}</div>
+                </div>`;
+            chatMessages.appendChild(msg);
+            scrollToBottom();
+        }
+
+        function addBotMessage(message) {
+            const msg = document.createElement('div');
+            msg.className = 'message bot';
+            msg.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${escapeHtml(message)}</div>
+                    <div class="message-time">${getCurrentTime()}</div>
+                </div>`;
+            chatMessages.appendChild(msg);
+            scrollToBottom();
+            if (!chatWindow.classList.contains('show')) notificationBadge.style.display = 'flex';
+        }
+
+        function addQuickReplies() {
+            const div = document.createElement('div');
+            div.className = 'quick-replies';
+            div.innerHTML = `
+                <button class="quick-reply-btn" onclick="sendQuickReply('Sepetimi görmek istiyorum')">🛒 Sepetim</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('Bugün hangi ürünler indirimde?')">💸 İndirimler</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('Bir tarif öner')">🍲 Tarif</button>
+            `;
+            chatMessages.appendChild(div);
+        }
+
+        window.sendQuickReply = (msg) => {
+            chatInput.value = msg;
+            chatForm.dispatchEvent(new Event('submit'));
+        };
+
+        function showTypingIndicator() {
+            isTyping = true;
+            sendBtn.disabled = true;
+            const div = document.createElement('div');
+            div.id = 'typingIndicator';
+            div.className = 'message bot';
+            div.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>`;
+            chatMessages.appendChild(div);
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            isTyping = false;
+            sendBtn.disabled = false;
+            document.getElementById('typingIndicator')?.remove();
+        }
+
+        const scrollToBottom = () => chatMessages.scrollTop = chatMessages.scrollHeight;
+        const getCurrentTime = () => new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+        const escapeHtml = (t) => { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+
+        initializeSignalR();
+    });
+</script>
+
+<style>
+    .chat-float-button {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 60px;
+        height: 60px;
+        background-color: #4CAF50;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: 0.3s;
+    }
+
+        .chat-float-button:hover {
+            transform: scale(1.1);
+            background-color: #43A047;
+        }
+
+    .chat-window {
+        position: fixed;
+        bottom: 95px;
+        right: 25px;
+        width: 370px;
+        height: 550px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 1100;
+    }
+
+        .chat-window.show {
+            display: flex;
+        }
+
+    .chat-header {
+        background: linear-gradient(90deg, #4CAF50, #66BB6A);
+        color: white;
+        padding: 14px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #43A047;
+    }
+
+    .chat-header-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chat-status {
+        font-size: 12px;
+        opacity: 0.9;
+    }
+
+    .chat-status-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #4ade80;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+
+    .chat-messages {
+        flex: 1;
+        padding: 18px;
+        overflow-y: auto;
+        background: #f6f9f6;
+    }
+
+    .message {
+        margin-bottom: 15px;
+        display: flex;
+        gap: 8px;
+    }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+    .message-bubble {
+        padding: 10px 15px;
+        border-radius: 18px;
+        font-size: 15px;
+    }
+
+    .message.bot .message-bubble {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border-bottom-left-radius: 5px;
+    }
+
+    .message.user .message-bubble {
+        background: #4CAF50;
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .chat-input {
+        padding: 18px 22px;
+        background: #ffffff;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .chat-input-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .chat-input-field {
+        flex: 1;
+        height: 52px; /* genişletildi */
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        padding: 10px 18px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+        .chat-input-field:focus {
+            border-color: #4CAF50;
+        }
+
+    .chat-send-btn {
+        width: 52px;
+        height: 52px;
+        background: #4CAF50;
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+
+        .chat-send-btn:hover {
+            background: #43A047;
+        }
+
+    .connection-status {
+        text-align: center;
+        font-size: 12px;
+        padding: 6px;
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        background: #81C784;
+        border-radius: 50%;
+        animation: typing 1.2s infinite;
+    }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+    @@keyframes typing {
+        0%, 80%, 100%
+
+    {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    }
+</style>

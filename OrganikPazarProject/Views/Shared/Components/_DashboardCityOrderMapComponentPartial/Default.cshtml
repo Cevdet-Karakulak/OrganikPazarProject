@@ -1,0 +1,59 @@
+﻿@model List<CityOrderViewModel>
+@using Newtonsoft.Json
+@using OrganikPazar.Models.ViewModels
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h4 class="card-title"><i class="fas fa-map-marker-alt"></i> Şehir Bazlı Sipariş Yoğunluğu</h4>
+            <div id="turkeyMap" style="height: 600px; border-radius: 10px;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cityData = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+    const cityCoords = {
+        "İstanbul": [41.0082, 28.9784],
+        "Ankara": [39.9334, 32.8597],
+        "İzmir": [38.4192, 27.1287],
+        "Bursa": [40.1828, 29.0669],
+        "Antalya": [36.8969, 30.7133],
+        "Konya": [37.8715, 32.4846],
+        "Adana": [37.0, 35.3213],
+        "Trabzon": [41.0, 39.7168],
+        "Gaziantep": [37.0662, 37.3833],
+        "Samsun": [41.2867, 36.33],
+        "Kayseri": [38.7333, 35.4833]
+    };
+
+    const map = L.map('turkeyMap').setView([39.0, 35.0], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 8,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    cityData.forEach(c => {
+        const coords = cityCoords[c.City];
+        if (!coords) return;
+
+        const circle = L.circleMarker(coords, {
+            radius: Math.sqrt(c.OrderCount) * 1.5,
+            color: '#6a0dad',
+            fillColor: '#b57edc',
+            fillOpacity: 0.6,
+            weight: 1
+        }).addTo(map);
+
+        circle.bindPopup(`
+            <b>${c.City}</b><br>
+            📦 Sipariş: <b>${c.OrderCount}</b><br>
+            💰 Ortalama: ${c.AvgPrice.toFixed(2)} TL<br>
+            🥦 En çok kategori: ${c.TopCategory || "Bilinmiyor"}
+        `);
+    });
+</script>

@@ -1,0 +1,95 @@
+﻿@model List<dynamic>
+
+@{
+    ViewData["Title"] = "🤖 Sipariş Tahminleri | ML.NET";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-3 text-primary fw-bold">🤖 ML.NET Sipariş Tahminleri</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a href="/ML/RunTrain" class="btn btn-success shadow-sm">
+        <i class="fa fa-robot"></i> Modeli Eğit ve Tahminleri Oluştur
+    </a>
+
+    <a href="/ML/TrainForecast" class="btn btn-outline-primary shadow-sm">
+        <i class="fa fa-sync"></i> Yenile
+    </a>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Şehir</th>
+                <th>Tahmin Ayı</th>
+                <th>Tahmini Sipariş Sayısı</th>
+                <th>Model Sürümü</th>
+                <th>Kayıt Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 0;
+                var sortedModel = Model
+                .OrderBy(x => x.City)
+                .ThenBy(x => (DateTime)x.ForecastMonth)
+                .ToList();
+            }
+
+            @foreach (var item in sortedModel)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td class="fw-semibold">@item.City</td>
+                    <td>@(((DateTime)item.ForecastMonth).ToString("MMMM yyyy"))</td>
+                    <td><strong class="text-success">@item.PredictedOrders</strong></td>
+                    <td>@item.ModelVersion</td>
+                    <td>@(((DateTime)item.CreatedAt).ToString("dd.MM.yyyy HH:mm"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info text-center shadow-sm">
+        Henüz tahmin verisi bulunamadı. <br />
+        <b>“Modeli Eğit ve Tahminleri Oluştur”</b> butonuna tıklayarak başlatabilirsin.
+    </div>
+}
+
+<style>
+    body {
+        background-color: #f5f6fa;
+    }
+
+    h2 {
+        color: #1b4b91;
+        font-weight: 700;
+    }
+
+    .table {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn {
+        font-weight: 500;
+        border-radius: 8px;
+    }
+
+    .alert {
+        border-radius: 10px;
+        background-color: #e9f0ff;
+        color: #1b4b91;
+    }
+
+    .text-success {
+        font-weight: 600;
+    }
+</style>

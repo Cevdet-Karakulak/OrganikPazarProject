@@ -1,0 +1,51 @@
+﻿@model OrganikPazar.Entities.Customer
+
+@{
+    ViewData["Title"] = "🆕 Yeni Müşteri Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-3">🆕 Yeni Müşteri Ekle</h2>
+
+<form asp-action="Create" method="post" class="card p-4 shadow-sm">
+    <input type="hidden" asp-for="Registerdate" value="@DateTime.Now" />
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Ad</label>
+            <input asp-for="Firstname" class="form-control" placeholder="Müşteri adı" />
+        </div>
+        <div class="col-md-6">
+            <label>Soyad</label>
+            <input asp-for="Lastname" class="form-control" placeholder="Müşteri soyadı" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" placeholder="E-posta adresi" />
+        </div>
+        <div class="col-md-6">
+            <label>Telefon</label>
+            <input asp-for="Phone" class="form-control" placeholder="05xx xxx xxxx" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Şehir</label>
+            <input asp-for="City" class="form-control" placeholder="Şehir adı" />
+        </div>
+        <div class="col-md-6">
+            <label>Adres</label>
+            <input asp-for="Address" class="form-control" placeholder="Adres bilgisi" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-save"></i> Kaydet
+    </button>
+    <a href="/Customer" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i> Geri Dön
+    </a>
+</form>
