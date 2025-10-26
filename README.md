@@ -44,10 +44,19 @@ Bu proje, bir “organik ürün pazarı”nı uçtan uca modelleyerek hem verita
 
 ## 🧠 **Yapay Zekâ & ML.NET Entegrasyonu**
 
+
 ### 🔹 Google Gemini AI  
 Kullanıcı elindeki malzemeleri yazdığında sistem, **Google Gemini API** ile doğal dil analizi yapar ve uygun bir yemek tarifi önerir.  
-Örnek:  
-> “Domates, soğan, zeytinyağı, makarna” → *“Zeytinyağlı Domatesli Makarna Tarifi”* 🍝
+Ayrıca tarif içeriğine göre **site içi ürün önerileri** sunulur:
+
+- Örnek tarif: *“Zeytinyağlı Domatesli Makarna”* 🍝  
+  Önerilen ürünler: *Domates (500g)*, *Zeytinyağı (1L)*, *Makarna (500g)*, *Sarımsak (100g)*  
+  - 🔗 **Detaya Git:** `/product/{productId}` örn. `/product/42`  
+  - 🛒 **Sepete Ekle:** `/cart/add?productId={productId}&qty=1` *(sepet modülü aktif değilse “Sipariş Başlat” veya WhatsApp yönlendirmesi kullanılabilir)*  
+  - 💬 **Alternatif (Sepet yoksa):** `https://wa.me/905555555555?text=Merhaba,%20{productName}%20siparişi%20vermek%20istiyorum`
+
+> Öneri motoru; tarifte geçen malzemeleri **SKU/etiket eşleşmesi** ile `product.productname` ve `product.description` alanlarında arar, kategori/benzerlik skoruna göre sıralar.
+
 
 ### 🔹 ML.NET Satış Tahmini  
 Sistem, geçmiş 100.000 sipariş verisini analiz ederek **şehir bazlı satış tahmini modeli** oluşturur.  
@@ -84,8 +93,8 @@ Kullanıcı veya admin, 📞 ikonuna tıklayarak **WhatsApp Web** üzerinden do�
 ## 👨‍💻 **Geliştirici**
 
 **Cevdet Karakulak**  
-🧩 Full Stack Developer · AI & Data Enthusiast  
-🌐 [LinkedIn](https://www.linkedin.com/in/cevdetkarakulak) | 💻 [GitHub](https://github.com/cevdetkarakulak)
+🧩 Full Stack Developer 
+🌐 [LinkedIn](https://www.linkedin.com/in/cevdet) | 💻 [GitHub](https://github.com/Cevdet-Karakulak)
 
 ---
 
