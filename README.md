@@ -150,18 +150,6 @@ Tüm veriler **ChatGPT**, **Python** ve **CSV otomasyonları** kullanılarak olu
 | 📦 **Siparişler (Orders)** | Ürün ve müşteri verilerine bağlı **100.000 adet sipariş**; miktar, fiyat, şehir, tarih, durum bilgileriyle birlikte. | **100.000 satır (CSV)** | Python + ChatGPT ile üretilip PostgreSQL’e toplu CSV import (COPY FROM) yöntemiyle aktarılmıştır. |
 
 ---
-
-### 🔹 **Veri Yükleme Aşamaları**
-
-1. **Ürün Verileri (250 satır)**  
-   ChatGPT kullanılarak gıda kategorilerine ayrılmış şekilde hazırlandı ve aşağıdaki gibi PostgreSQL’e eklendi:
-   ```sql
-   INSERT INTO product (categoryid, productname, description, unitprice, stock, imageurl, isfeatured, rating)
-   VALUES (1, 'Organik Elma', 'Doğal ve katkısız Amasya elması', 24.90, 150, '/images/elma.jpg', true, 4.8);
-INSERT INTO customer (firstname, lastname, email, phone, city, address, registerdate, customerbalance)
-VALUES ('Ayşe', 'Demir', 'ayse.demir@example.com', '05321234567', 'İzmir', 'Atatürk Mah. 45. Sok. No:12', '2024-02-15', 850.50);
-
----
 ## 📸 **Ekran Görüntüleri**
 
 
