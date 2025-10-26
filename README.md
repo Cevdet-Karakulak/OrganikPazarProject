@@ -46,7 +46,7 @@ Model, sipariş sayısı, şehir, kategori ve tarih parametrelerini değerlendir
 - 📅 **Mart 2026** → Tahmini Sipariş: **113**
 ---
 ### 📸 Örnek Ekran Görüntüsü
-<img width="1910" height="946" alt="Image" src="https://github.com/user-attachments/assets/74878044-f67d-4550-a3a5-c6cc94ab6cc1" />
+<img width="1913" height="902" alt="Image" src="https://github.com/user-attachments/assets/f6285492-d5b3-462c-94e8-4920f380d16a" />
 ---
 
 ## 🧠 **AI Tarif Öneri Sistemi & Ürün Tavsiye Motoru (Google Gemini)**
