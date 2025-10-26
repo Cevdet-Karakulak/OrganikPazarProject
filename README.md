@@ -74,7 +74,7 @@ ve sistem aşağıdaki bileşenleri oluşturur:
 ---
 
 ### 📸 Örnek Ekran Görüntüsü
-<img width="1900" height="889" alt="Image" src="https://github.com/user-attachments/assets/343a599c-2e68-4259-a07f-07b12150aeea" />
+<img width="1900" height="912" alt="Image" src="https://github.com/user-attachments/assets/e244a85e-0649-49c8-93de-2c1003276d34" />
 
 ---
 
