@@ -74,7 +74,7 @@ ve sistem aşağıdaki bileşenleri oluşturur:
 ---
 
 ### 📸 Örnek Ekran Görüntüsü
-![AI Tarif Öneri Sistemi](https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/AI_Recipe_Suggestion.png)
+<img width="1900" height="889" alt="Image" src="https://github.com/user-attachments/assets/343a599c-2e68-4259-a07f-07b12150aeea" />
 
 ---
 
