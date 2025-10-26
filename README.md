@@ -99,7 +99,7 @@ Her şehirdeki sipariş yoğunluğu, ortalama sipariş tutarı ve en çok sipari
 ---
 
 ### 📸 Örnek Ekran Görüntüsü
-![Leaflet Harita Analizi](https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/Leaflet_Heatmap.png)
+<img width="1914" height="898" alt="Image" src="https://github.com/user-attachments/assets/ed2b09bf-3126-4173-b2ad-f9a78a052f7e" />
 
 ---
 
