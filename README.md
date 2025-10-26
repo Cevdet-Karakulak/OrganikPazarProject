@@ -1,12 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/OrganikPazar_Banner.png" alt="Organik Pazar | AI Powered Marketplace Banner" width="100%">
-</p>
-
-
-<h3 align="center">🍏 Organik Pazar – AI Powered Marketplace built with ASP.NET Core 9.0 & PostgreSQL</h3>
-
----
-
 # 🍏 **Organik Pazar | ASP.NET Core 9.0 + PostgreSQL + AI + ML.NET + SignalR + Multi-Language Gerçek Dünya Projesi** 🚀
 
 **Organik Pazar**, **ASP.NET Core 9.0 MVC** ve **PostgreSQL** teknolojileriyle geliştirilen, **ML.NET** destekli satış tahmini, **Google Gemini** tabanlı tarif öneri sistemi, **SignalR canlı chat** altyapısı, **Leaflet harita analizleri** ve **çoklu dil (TR / EN / FR)** desteği barındıran profesyonel bir tam yığın (Full Stack) projedir.  
