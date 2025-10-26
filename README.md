@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://github.com/cevdetkarakulak/OrganikPazar/blob/main/OrganikPazar_Banner.png?raw=true" alt="Organik Pazar | AI Powered Marketplace Banner" width="100%">
+</p>
+
+<h3 align="center">🍏 Organik Pazar – AI Powered Marketplace built with ASP.NET Core 9.0 & PostgreSQL</h3>
+
+---
+
 # 🍏 **Organik Pazar | ASP.NET Core 9.0 + PostgreSQL + AI + ML.NET + SignalR + Multi-Language Gerçek Dünya Projesi** 🚀
 
 **Organik Pazar**, **ASP.NET Core 9.0 MVC** ve **PostgreSQL** teknolojileriyle geliştirilen, **ML.NET** destekli satış tahmini, **Google Gemini** tabanlı tarif öneri sistemi, **SignalR canlı chat** altyapısı, **Leaflet harita analizleri** ve **çoklu dil (TR / EN / FR)** desteği barındıran profesyonel bir tam yığın (Full Stack) projedir.  
@@ -18,33 +26,16 @@ Bu proje, bir “organik ürün pazarı”nı uçtan uca modelleyerek hem verita
 
 ---
 
-## 🏗️ **Mimari Yapı**
-
-Proje katmanlı bir yapı üzerine kurulmuş olup **Entity Framework Core**, **Dependency Injection** ve **Repository Pattern** prensipleriyle yönetilmektedir.  
-
-| Katman | Açıklama |
-|--------|-----------|
-| 🏛️ **Entities** | Veritabanı modelleri: Product, Category, Customer, Order, Log |
-| ⚙️ **DataAccess** | EF Core + Npgsql ile PostgreSQL veri erişimi |
-| 🧠 **Services (Business)** | AI, ML.NET Forecast, Logger ve Chat servisleri |
-| 🌐 **Presentation (UI)** | ASP.NET Core MVC tabanlı admin paneli ve kullanıcı arayüzü |
-| 💬 **Hubs** | SignalR tabanlı Chat Hub |
-| 🧩 **Helpers** | LoggerHelper, AIService, MLHelper, WhatsAppHelper |
-
----
-
 ## ⚙️ **Kullanılan Teknolojiler**
 
 <p align="center">
   <img src="https://img.shields.io/badge/.NET%209.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/Entity%20Framework%20Core-5C2D91?style=for-the-badge" />
   <img src="https://img.shields.io/badge/ML.NET-FF6B6B?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Google%20Gemini%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white" />
   <img src="https://img.shields.io/badge/SignalR-0A66C2?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Leaflet%20Map-1C7C54?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Chart.js-FD3A5C?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
   <img src="https://img.shields.io/badge/Multi--Language%20(TR%2FEN%2FFR)-F39C12?style=for-the-badge" />
   <img src="https://img.shields.io/badge/WhatsApp%20Integration-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
 </p>
@@ -66,8 +57,6 @@ Model, sipariş sayısı, şehir, kategori ve tarih parametrelerini değerlendir
 - 📅 **Ocak 2026** → Tahmini Sipariş: **110**  
 - 📅 **Şubat 2026** → Tahmini Sipariş: **100**  
 - 📅 **Mart 2026** → Tahmini Sipariş: **113**
-
-Model, `MLContext`, `RegressionTrainer`, ve `IDataView` kullanılarak **ML.NET pipeline**’ında eğitilmiştir.
 
 ---
 
