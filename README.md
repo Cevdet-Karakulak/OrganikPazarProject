@@ -113,12 +113,15 @@ Bu harita bileşeni, **veri analitiği + coğrafi görselleştirme** birleşimiy
 - Dil değişimi `Session` veya `Cookie` üzerinden hatırlanır.  
 - Admin paneli ve kullanıcı arayüzü tamamen **Türkçe**, **İngilizce** ve **Fransızca** dillerine lokalize edilmiştir.  
 
+<img width="1885" height="916" alt="Image" src="https://github.com/user-attachments/assets/24524edc-46ee-40d6-9348-bd344e3a5c05" />
+<img width="1897" height="910" alt="Image" src="https://github.com/user-attachments/assets/054ca840-8f31-45c9-9629-2d6b71cd6c40" />
+<img width="1900" height="897" alt="Image" src="https://github.com/user-attachments/assets/316b101d-63dc-4718-99b4-0f3b13034f47" />
 ---
 
 ## 📱 **WhatsApp Entegrasyonu**
 
 Kullanıcı veya admin, 📞 ikonuna tıklayarak **WhatsApp Web** üzerinden doğrudan iletişim kurabilir.
-
+<img width="1278" height="813" alt="Image" src="https://github.com/user-attachments/assets/ce637cd8-d4f1-4696-b54c-a25cf60ac072" />
 ---
 
 ## 👨‍💻 **Geliştirici**
