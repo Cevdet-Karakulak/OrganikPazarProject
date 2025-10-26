@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="https://github.com/cevdetkarakulak/OrganikPazar/blob/main/OrganikPazar_Banner.png?raw=true" alt="Organik Pazar | AI Powered Marketplace Banner" width="100%">
+  <img src="https://raw.githubusercontent.com/cevdetkarakulak/OrganikPazar/main/OrganikPazar_Banner.png" alt="Organik Pazar | AI Powered Marketplace Banner" width="100%">
 </p>
+
 
 <h3 align="center">🍏 Organik Pazar – AI Powered Marketplace built with ASP.NET Core 9.0 & PostgreSQL</h3>
 
