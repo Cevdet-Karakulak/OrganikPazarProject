@@ -194,12 +194,14 @@ Tüm veriler **ChatGPT**, **Python** ve **CSV otomasyonları** kullanılarak olu
 <img width="1917" height="914" alt="Image" src="https://github.com/user-attachments/assets/a99267fc-7b61-4fb7-bd35-19fba981ce46" />
 <img width="1913" height="902" alt="Image" src="https://github.com/user-attachments/assets/f6285492-d5b3-462c-94e8-4920f380d16a" />
 
-### 🛍️ Vitrin Paneli 
+### 🖼️ Vitrin Paneli 
 <img width="1910" height="946" alt="Image" src="https://github.com/user-attachments/assets/74878044-f67d-4550-a3a5-c6cc94ab6cc1" />
 <img width="1898" height="909" alt="Image" src="https://github.com/user-attachments/assets/aae3f124-42fd-459b-9c75-90d879819978" />
 <img width="1886" height="914" alt="Image" src="https://github.com/user-attachments/assets/f7d38b0a-6e15-435f-ad51-2674aabadb97" />
 <img width="1901" height="904" alt="Image" src="https://github.com/user-attachments/assets/09f80bed-3646-4815-b6bc-b7a34cde9b7c" />
 <img width="1900" height="912" alt="Image" src="https://github.com/user-attachments/assets/8ecbc6e4-8773-4cc2-91fd-f1b094416f66" />
+
+### 💬 SignalR Canlı Chat
 <img width="1902" height="906" alt="Image" src="https://github.com/user-attachments/assets/efdcc8cd-4926-4a85-b372-92e33631ce12" />
 <img width="1656" height="895" alt="Image" src="https://github.com/user-attachments/assets/9cbb0cd2-5376-489b-ae35-fa102f5aac57" />
 
@@ -218,12 +220,5 @@ Bu proje **MIT Lisansı** ile paylaşılmıştır.
 Kişisel, eğitim ve portföy amaçlı kullanımlar için serbesttir.  
 
 ---
-
-## 🌟 **Teşekkürler**
-
-> M&Y Yazılım Akademi ve Murat Yücedağ’a ilhamları için teşekkür ederim.  
-> Organik Pazar, modern .NET teknolojilerinin AI, ML.NET ve çoklu dil desteğiyle birleştiği uçtan uca bir Full Stack başarı örneğidir.
-
-
 
 
