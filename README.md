@@ -154,12 +154,8 @@ Tüm veriler **ChatGPT**, **Python** ve **CSV otomasyonları** kullanılarak olu
 
 
 <img width="1885" height="916" alt="Image" src="https://github.com/user-attachments/assets/81c203b9-d0c8-4a0f-80c5-285f28a23c1e" />
-<img width="1897" height="910" alt="Image" src="https://github.com/user-attachments/assets/0da78eec-71f2-4f4a-8532-53dc85d7a2d0" />
-<img width="1900" height="897" alt="Image" src="https://github.com/user-attachments/assets/e4b03e15-b02f-4a0b-89d9-4f11290ba92d" />
 <img width="1903" height="905" alt="Image" src="https://github.com/user-attachments/assets/f09f9c1a-fe1a-4408-b751-8ef4f071f5d6" />
 <img width="1907" height="898" alt="Image" src="https://github.com/user-attachments/assets/f9480355-d55d-4fb4-ae06-844fc223b005" />
-<img width="1914" height="898" alt="Image" src="https://github.com/user-attachments/assets/ed2b09bf-3126-4173-b2ad-f9a78a052f7e" />
-<img width="1666" height="501" alt="Image" src="https://github.com/user-attachments/assets/081a18d3-64c8-4518-9d29-1cafad566304" />
 <img width="1901" height="916" alt="Image" src="https://github.com/user-attachments/assets/cc33f970-7723-4a0c-855c-46799edcc815" />
 <img width="1912" height="887" alt="Image" src="https://github.com/user-attachments/assets/4d3ea7c4-bb81-4f15-80ce-155d94a0ad01" />
 <img width="1915" height="908" alt="Image" src="https://github.com/user-attachments/assets/73564f5f-311f-4a86-8e73-c3a0593556ef" />
@@ -189,13 +185,15 @@ Tüm veriler **ChatGPT**, **Python** ve **CSV otomasyonları** kullanılarak olu
 <img width="1278" height="813" alt="Image" src="https://github.com/user-attachments/assets/1837efef-b4d3-4f33-9001-a06342651bd3" />
 <img width="1907" height="917" alt="Image" src="https://github.com/user-attachments/assets/fcbd9b22-872d-4f5d-9422-8fecbaf7496c" />
 <img width="1902" height="906" alt="Image" src="https://github.com/user-attachments/assets/efdcc8cd-4926-4a85-b372-92e33631ce12" />
+<img width="1895" height="906" alt="Image" src="https://github.com/user-attachments/assets/492a5836-1cb9-4ed8-9931-701d8339d47b" />
+<img width="1656" height="895" alt="Image" src="https://github.com/user-attachments/assets/9cbb0cd2-5376-489b-ae35-fa102f5aac57" />
 
 ---
 ## 👨‍💻 **Geliştirici**
 
 **Cevdet Karakulak**  
-🧩 Full Stack Developer · AI & Data Enthusiast  
-🌐 [LinkedIn](https://www.linkedin.com/in/cevdetkarakulak) | 💻 [GitHub](https://github.com/cevdetkarakulak)
+🧩 Full Stack Developer 
+🌐 [LinkedIn](https://www.linkedin.com/in/cevdet) | 💻 [GitHub](https://github.com/Cevdet-Karakulak)
 
 ---
 
@@ -212,7 +210,5 @@ Kişisel, eğitim ve portföy amaçlı kullanımlar için serbesttir.
 > Organik Pazar, modern .NET teknolojilerinin AI, ML.NET ve çoklu dil desteğiyle birleştiği uçtan uca bir Full Stack başarı örneğidir.
 
 
-<img width="1895" height="906" alt="Image" src="https://github.com/user-attachments/assets/492a5836-1cb9-4ed8-9931-701d8339d47b" />
 
-<img width="1656" height="895" alt="Image" src="https://github.com/user-attachments/assets/9cbb0cd2-5376-489b-ae35-fa102f5aac57" />
 
