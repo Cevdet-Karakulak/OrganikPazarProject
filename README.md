@@ -196,10 +196,11 @@ Tüm veriler **ChatGPT**, **Python** ve **CSV otomasyonları** kullanılarak olu
 
 ### 🖼️ Vitrin Paneli 
 <img width="1910" height="946" alt="Image" src="https://github.com/user-attachments/assets/74878044-f67d-4550-a3a5-c6cc94ab6cc1" />
-<img width="1898" height="909" alt="Image" src="https://github.com/user-attachments/assets/aae3f124-42fd-459b-9c75-90d879819978" />
 <img width="1886" height="914" alt="Image" src="https://github.com/user-attachments/assets/f7d38b0a-6e15-435f-ad51-2674aabadb97" />
 <img width="1901" height="904" alt="Image" src="https://github.com/user-attachments/assets/09f80bed-3646-4815-b6bc-b7a34cde9b7c" />
 <img width="1900" height="912" alt="Image" src="https://github.com/user-attachments/assets/8ecbc6e4-8773-4cc2-91fd-f1b094416f66" />
+<img width="1898" height="909" alt="Image" src="https://github.com/user-attachments/assets/aae3f124-42fd-459b-9c75-90d879819978" />
+
 
 ### 💬 SignalR Canlı Chat
 <img width="1902" height="906" alt="Image" src="https://github.com/user-attachments/assets/efdcc8cd-4926-4a85-b372-92e33631ce12" />
